@@ -29,7 +29,7 @@ test('zod-validator should evaluate valid request with schema parseAsync method 
     })
   ).resolves.toStrictEqual(undefined);
 
-  expect(schemaParseAsyncSpy).toBeCalledWith(validEvent);
+  expect(schemaParseAsyncSpy).toHaveBeenCalledWith(validEvent);
 });
 
 test('zod-validator should evaluate invalid request with schema parseAsync method and reject error', async () => {
@@ -45,7 +45,7 @@ test('zod-validator should evaluate invalid request with schema parseAsync metho
     })
   ).rejects.toBeInstanceOf(createHttpError.BadRequest);
 
-  expect(schemaParseAsyncSpy).toBeCalledWith(invalidEvent);
+  expect(schemaParseAsyncSpy).toHaveBeenCalledWith(invalidEvent);
 });
 
 test('middyfied handler should resolve if the schema passes validation', async () => {
@@ -55,7 +55,7 @@ test('middyfied handler should resolve if the schema passes validation', async (
     response
   );
 
-  expect(schemaParseAsyncSpy).toBeCalledWith(validEvent);
+  expect(schemaParseAsyncSpy).toHaveBeenCalledWith(validEvent);
 });
 
 test('middyfied handler should reject a Bad Request error if the schema does not pass', async () => {
@@ -64,5 +64,5 @@ test('middyfied handler should reject a Bad Request error if the schema does not
     middyfiedHandler(invalidEvent as unknown as EventSchema, {} as Context)
   ).rejects.toBeInstanceOf(createHttpError.BadRequest);
 
-  expect(schemaParseAsyncSpy).toBeCalledWith(invalidEvent);
+  expect(schemaParseAsyncSpy).toHaveBeenCalledWith(invalidEvent);
 });
